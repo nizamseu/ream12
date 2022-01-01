@@ -3,7 +3,7 @@ import Navbar from "./Conponents/Home/Navbar/Navbar";
 function App() {
   return (
     <div>
-      <Navbar></Navbar>
+      <h1>team12</h1>
     </div>
   );
 }
