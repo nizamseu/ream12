@@ -1,0 +1,8 @@
+.addCard {
+  display: none;
+}
+
+.card:hover .addCard {
+  display: block;
+  overflow: hidden;
+}
