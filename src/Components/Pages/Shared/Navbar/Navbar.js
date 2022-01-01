@@ -15,6 +15,7 @@ import Badge from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const pages = ["Products", "Resistration", "Upcomming"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -29,6 +30,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 const Navbar = () => {
+  const cart = useSelector((state) => state.products.cart);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -46,7 +48,7 @@ const Navbar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
+  console.log("nav", cart);
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -117,8 +119,8 @@ const Navbar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <IconButton onClick={() => { }} aria-label="cart" sx={{ mr: 3 }}>
-              <StyledBadge badgeContent={4} color="secondary">
+            <IconButton onClick={() => {}} aria-label="cart" sx={{ mr: 3 }}>
+              <StyledBadge badgeContent={cart.length} color="secondary">
                 <ShoppingCartIcon />
               </StyledBadge>
             </IconButton>

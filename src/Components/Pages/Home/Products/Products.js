@@ -15,10 +15,11 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import "./Products.css";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { loadProduct } from "../../../../Redux/productsSlice";
+import { addCart, loadProduct } from "../../../../Redux/productsSlice";
 
 const Products = () => {
   const ProductData = useSelector((state) => state.products.product);
+  const cart = useSelector((state) => state.products.cart);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,7 +29,11 @@ const Products = () => {
         dispatch(loadProduct(data));
       });
   }, []);
-  console.log(ProductData);
+
+  const addToCart = (item) => {
+    dispatch(addCart(item));
+  };
+  console.log(cart);
   return (
     <Container sx={{ marginTop: "50px" }}>
       <Grid container spacing={{ xs: 2, md: 4 }}>
@@ -67,7 +72,7 @@ const Products = () => {
               </CardContent>
               <div className="addCard">
                 <CardActions sx={{ justifyContent: "center" }}>
-                  <Button variant="contained">
+                  <Button variant="contained" onClick={() => addToCart(item)}>
                     {" "}
                     <AddShoppingCartIcon sx={{ marginRight: "15px" }} />
                     ADD TO CART
