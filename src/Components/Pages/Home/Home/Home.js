@@ -1,6 +1,6 @@
 import React from "react";
+import Footer from "../../Shared/Footer/Footer";
 import Navbar from "../../Shared/Navbar/Navbar";
-import Category from "../Category/Category";
 import Products from "../Products/Products";
 
 const Home = () => {
@@ -9,6 +9,7 @@ const Home = () => {
       <Navbar />
       {/* <Category /> */}
       <Products />
+      <Footer></Footer>
     </div>
   );
 };
