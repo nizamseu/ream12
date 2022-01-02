@@ -16,8 +16,9 @@ import { styled } from "@mui/material/styles";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import useAuth from "../../../../Hooks/useAuth";
 
-const pages = ["Products", "Resistration", "Upcomming"];
+const pages = ["Products", "Registration", "Upcomming"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -29,8 +30,8 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-
 const Navbar = () => {
+  const { loginWithGoogle, user, logOut } = useAuth();
   const cart = useSelector((state) => state.products.cart);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -49,7 +50,7 @@ const Navbar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  console.log("nav", cart);
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -58,9 +59,11 @@ const Navbar = () => {
             variant="h6"
             noWrap
             component="div"
-            sx={{ mr: 2, display: { xs: "none", md: "flex" }, }}
+            sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
           >
-            <Link style={{ textDecoration: 'none', color: 'white' }} to="/home">LOGO</Link>
+            <Link style={{ textDecoration: "none", color: "white" }} to="/home">
+              LOGO
+            </Link>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -92,11 +95,19 @@ const Navbar = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Link to={"/products"}>Products</Link>
+              </MenuItem>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Link to={"/registration"}>Registration</Link>
+              </MenuItem>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Link to={"/upcomming"}>Upcomming</Link>
+              </MenuItem>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Link to={"/Login"}>Login</Link>
+                {/* <Button onClick={loginWithGoogle}>Login</Button> */}
+              </MenuItem>
             </Menu>
           </Box>
           <Typography
@@ -107,25 +118,29 @@ const Navbar = () => {
           >
             LOGO
           </Typography>
+
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {/* <Link to={`${page}`}>{page}</Link> */}
-                {page}
-
-              </Button>
-
-            ))}
+            <MenuItem>
+              <Link to={"/products"}>Products</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to={"/registration"}>Registration</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to={"/upcomming"}>Upcomming</Link>
+            </MenuItem>
+            <MenuItem>
+              {/* <Button onClick={loginWithGoogle} color="error">
+                Login
+              </Button> */}
+              {!user.email && <Link to={"/Login"}>Login</Link>}
+            </MenuItem>
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ flexGrow: 0, display: "flex", alignItems: "center" }}>
+            <Typography>{user?.displayName}</Typography>
             <Link to="/cart">
-              <IconButton onClick={() => { }} aria-label="cart" sx={{ mr: 3 }}>
+              <IconButton aria-label="cart" sx={{ mr: 3 }}>
                 <StyledBadge badgeContent={cart.length} color="secondary">
                   <ShoppingCartIcon />
                 </StyledBadge>
@@ -133,10 +148,7 @@ const Navbar = () => {
             </Link>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar
-                  alt="Remy Sharp"
-                  src="https://i.ibb.co/vBgGkJz/1-25.jpg"
-                />
+                <Avatar alt="Remy Sharp" src={user?.photoURL} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -155,11 +167,22 @@ const Navbar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Link to={"/Profile"}>Profile</Link>
+              </MenuItem>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Link to={"/Account"}>Account</Link>
+              </MenuItem>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Link to={"/Dashboard"}>Dashboard</Link>
+              </MenuItem>
+              <MenuItem onClick={handleCloseNavMenu}>
+                {user.email && (
+                  <Button varient="contained" color="error" onClick={logOut}>
+                    Logout
+                  </Button>
+                )}
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

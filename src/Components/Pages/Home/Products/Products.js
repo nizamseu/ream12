@@ -34,13 +34,16 @@ const Products = () => {
   const addToCart = (item) => {
     dispatch(addCart(item));
   };
-  console.log(cart);
+  console.log(ProductData);
   return (
     <Container sx={{ marginTop: "50px" }}>
       <Grid container spacing={{ xs: 2, md: 4 }}>
         {ProductData.map((item) => (
           <Grid item xs={12} sm={6} md={3} className="cartMain" key={item._id}>
-            <Link style={{ textDecoration: 'none' }} to={`/products/${item._id}`}>
+            <Link
+              style={{ textDecoration: "none" }}
+              to={`/products/${item._id}`}
+            >
               <Card sx={{ maxWidth: 345 }} className="card childcart">
                 <CardMedia
                   component="img"
@@ -49,15 +52,32 @@ const Products = () => {
                   image={item.img}
                 />
                 <CardContent>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Typography gutterBottom variant="caption" sx={{ color: 'text.secondary' }} component="div">
+                  <Box
+                    sx={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <Typography
+                      gutterBottom
+                      variant="caption"
+                      sx={{ color: "text.secondary" }}
+                      component="div"
+                    >
                       {item.model}
                     </Typography>
-                    <Typography gutterBottom variant="caption" sx={{ color: 'text.secondary' }} component="div">
+                    <Typography
+                      gutterBottom
+                      variant="caption"
+                      sx={{ color: "text.secondary" }}
+                      component="div"
+                    >
                       Serial: {item.serial}
                     </Typography>
                   </Box>
-                  <Typography gutterBottom variant="h5" sx={{ fontWeight: 'bold' }} component="div">
+                  <Typography
+                    gutterBottom
+                    variant="h5"
+                    sx={{ fontWeight: "bold" }}
+                    component="div"
+                  >
                     {item.name}
                   </Typography>
                   <Typography
@@ -87,7 +107,6 @@ const Products = () => {
                     </Button>
                   </div>
                 </CardActions>
-
               </Card>
             </Link>
           </Grid>
