@@ -61,7 +61,9 @@ const Cart = () => {
                                     </Box>
                                     <Box>
                                         <Box >
-                                            <RemoveOutlinedIcon onClick={() => handleQuantity("dec")} /><span style={{ border: '1px solid gray', padding: '0 6px', fontWeight: "bold", position: 'relative', bottom: '8px', margin: '0 5px' }}>{0}</span> <AddOutlinedIcon onClick={() => handleQuantity("inc")} />
+                                            <RemoveOutlinedIcon onClick={() => handleQuantity("dec")} />
+                                            <span style={{ border: '1px solid gray', padding: '0 6px', fontWeight: "bold", position: 'relative', bottom: '8px', margin: '0 5px' }}>{0}</span>
+                                            <AddOutlinedIcon onClick={() => handleQuantity("inc")} />
                                         </Box>
                                         <Typography variant="h5" sx={{ marginTop: '20px' }}>${pd.quantity * pd.price}</Typography>
 
