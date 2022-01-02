@@ -38,20 +38,25 @@ const Products = () => {
     <Container sx={{ marginTop: "50px" }}>
       <Grid container spacing={{ xs: 2, md: 4 }}>
         {ProductData.map((item) => (
-          <Grid item xs={12} sm={6} md={3} className="cartMain">
+          <Grid item xs={12} sm={6} md={3} className="cartMain" key={item._id}>
             <Card sx={{ maxWidth: 345 }} className="card childcart">
               <CardMedia
                 component="img"
                 alt="green iguana"
-                height="140"
+                className="cardImage"
                 image={item.img}
               />
               <CardContent>
-                {/* <Typography gutterBottom variant="h6" sx={{ color: 'text.secondary' }} component="div">
-                                        Lizard
-                                    </Typography> */}
-                <Typography gutterBottom variant="h5" component="div">
-                  {item.model}
+                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <Typography gutterBottom variant="caption" sx={{ color: 'text.secondary' }} component="div">
+                    {item.model}
+                  </Typography>
+                  <Typography gutterBottom variant="caption" sx={{ color: 'text.secondary' }} component="div">
+                    Serial: {item.serial}
+                  </Typography>
+                </Box>
+                <Typography gutterBottom variant="h5" sx={{ fontWeight: 'bold' }} component="div">
+                  {item.name}
                 </Typography>
                 <Typography
                   gutterBottom
@@ -59,7 +64,7 @@ const Products = () => {
                   sx={{ color: "text.secondary" }}
                   component="div"
                 >
-                  ${item.price}
+                  ৳ {item.price}
                 </Typography>
                 <Typography gutterBottom variant="h5" component="div">
                   <Rating
@@ -70,15 +75,17 @@ const Products = () => {
                   />
                 </Typography>
               </CardContent>
-              <div className="addCard">
-                <CardActions sx={{ justifyContent: "center" }}>
+
+              <CardActions sx={{ justifyContent: "center" }}>
+                <div className="addCard">
                   <Button variant="contained" onClick={() => addToCart(item)}>
                     {" "}
                     <AddShoppingCartIcon sx={{ marginRight: "15px" }} />
                     ADD TO CART
                   </Button>
-                </CardActions>
-              </div>
+                </div>
+              </CardActions>
+
             </Card>
           </Grid>
         ))}
