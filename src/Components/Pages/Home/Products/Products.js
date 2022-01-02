@@ -33,7 +33,7 @@ const Products = () => {
   const addToCart = (item) => {
     dispatch(addCart(item));
   };
-  console.log(cart);
+  console.log(ProductData);
   return (
     <Container sx={{ marginTop: "50px" }}>
       <Grid container spacing={{ xs: 2, md: 4 }}>
