@@ -75,7 +75,7 @@ const Products = () => {
                     <Rating
                       name="half-rating"
                       defaultValue={2.5}
-                      precision={0.5}
+                      precision={item.rate}
                       readOnly
                     />
                   </Typography>

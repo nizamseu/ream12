@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Box, CardContent, CardMedia, Grid, IconButton, Paper, Typography, Card, Divider, Button } from '@mui/material';
+import { Box, CardContent, CardMedia, Grid, IconButton, Paper, Typography, Card, Divider, Button, Rating } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -41,7 +41,13 @@ const Cart = () => {
                     <Grid item xs={12} md={8}>
                         {cart.map(pd =>
                             <Box style={{ borderBottom: "1px solid gray", marginBottom: '15px' }}>
-                                <Card sx={{ display: 'flex', sm: { flexDirection: "column" }, justifyContent: 'space-between', paddingY: '20px' }}>
+                                <Card sx={{
+                                    display: 'flex', flexDirection: { xs: "column", sm: "column", md: "column", lg: "row" },
+                                    justifyContent: { xs: "center", sm: "center", md: 'center', lg: "space-between" },
+                                    alignItems: { xs: "center", sm: "center", md: 'center', lg: "space-between" },
+
+                                    paddingY: '20px'
+                                }}>
 
                                     <Box sx={{ display: 'flex' }}>
                                         <CardMedia
@@ -64,15 +70,15 @@ const Cart = () => {
                                     </Box>
 
 
-                                    <Box>
+                                    <Box sx={{ marginTop: { xs: "30px", sm: "30px", md: 0, lg: 0 } }}>
                                         <Box >
                                             {/* <RemoveOutlinedIcon onClick={() => handleQuantity("dec")} /> */}
-                                            <span style={{ border: '1px solid gray', padding: '0 6px', fontWeight: "bold", position: 'relative', bottom: '8px', margin: '0 5px' }}>Quantity: {pd.quantity}</span>
+                                            <Paper variant="outlined" square elevation={3} sx={{ padding: '10px', color: "black", fontWeight: "bold" }} >Quantity: {pd.quantity}</Paper>
                                             {/* <AddOutlinedIcon onClick={() => handleQuantity("inc")} /> */}
                                         </Box>
-                                        <Typography variant="h5" sx={{ marginTop: '20px' }}> ৳ {parseInt(pd.price * pd.quantity).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Typography>
+                                        <Typography variant="h5" sx={{ marginTop: '10px' }}> ৳ {parseInt(pd.price * pd.quantity).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Typography>
 
-                                        <Button sx={{ margin: '30px 0 0 30px' }}>  <DeleteForeverIcon fontSize="large" /></Button>
+                                        <Button variant="contained" color="error" sx={{ margin: '10px 0 0 0' }}>REMOVE</Button>
                                     </Box>
 
 

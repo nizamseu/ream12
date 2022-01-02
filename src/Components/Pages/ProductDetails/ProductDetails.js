@@ -47,16 +47,25 @@ const ProductDetails = () => {
                 </Grid>
                 <Grid container sx={{ marginTop: '150px' }} item xs={12} md={6}>
                     <Box sx={{ margin: '15px' }}>
-                        <Typography variant='h5'>{product.name}</Typography>
-                        <br />
-                        <Rating name="read-only" value={product?.rating ? product.rating : 5} readOnly />
-                        <br />
-                        <Typography variant="h4">${product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Typography>
-                        <br />
-                        <Typography variant="body3" sx={{ color: "secondary" }}>{product.description}</Typography>
+                        <Typography variant='h5' sx={{ fontWeight: "bold" }} >{product.name}</Typography>
 
+                        <Typography gutterBottom variant="caption" sx={{ fontWeight: "bold" }} >{product.model}</Typography>
+                        <br />
+                        <br />
+                        <Rating name="read-only" value={product?.rate ? product.rate : 5} readOnly />
+                        <br />
+                        <Typography variant="body3" sx={{ color: "text.secondary", fontWeight: 'bold' }}>{product.desc}</Typography>
+                        <br /><br />
+                        <Typography gutterBottom variant="caption" sx={{ fontWeight: "bold" }} >MEMORY:{product?.spec?.memory}</Typography><br />
+                        <Typography gutterBottom variant="caption" sx={{ fontWeight: "bold" }} >RAM:{product?.spec?.ram}</Typography><br />
+                        <Typography gutterBottom variant="caption" sx={{ fontWeight: "bold" }} >CPU:{product?.spec?.cpu}</Typography><br />
+                        <Typography gutterBottom variant="caption" sx={{ fontWeight: "bold" }} >CLOCKSPEED:{product?.spec?.clockspeed}</Typography><br />
+                        <br /><br />
+                        <Typography variant="h5" sx={{ fontWeight: "bold", color: "text.primary" }}>${product?.price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Typography>
                         <Box style={{ marginTop: "20px" }} >
-                            <RemoveCircleIcon onClick={() => handleQuantity("dec")} /><span style={{ border: '1px solid gray', padding: '0 6px', fontWeight: "bold", position: 'relative', bottom: '8px', margin: '0 5px' }}>{quantity}</span> <AddCircleIcon onClick={() => handleQuantity("inc")} />
+                            <RemoveCircleIcon fontSize="large" onClick={() => handleQuantity("dec")} />
+                            <span style={{ padding: '5px 16px', fontWeight: "bold", position: 'relative', bottom: '8px', margin: '5px 15px', fontSize: "25px" }}>{quantity}</span>
+                            <AddCircleIcon fontSize="large" onClick={() => handleQuantity("inc")} />
                         </Box>
                         <Button sx={{ backgroundColor: "#F37539", color: "black", marginTop: "20px" }} onClick={handleClick} variant="outlined">ADD to Cart</Button>
                     </Box>
