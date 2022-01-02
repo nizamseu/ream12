@@ -13,6 +13,8 @@ import ManageOrders from "./Components/Pages/Dashboard/ManageOrders/ManageOrders
 import AddProduct from './Components/Pages/Dashboard/AddProduct/AddProduct';
 import UserManage from './Components/Pages/Dashboard/UserManage/UserManage';
 import MakeAdmin from "./Components/Pages/Dashboard/MakeAdmin/MakeAdmin";
+import Login from './Components/Login/Login/Login';
+import Registration from './Components/Login/Registration/Registration';
 
 
 function App() {
@@ -24,6 +26,8 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<ProductDetails />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/registration" element={<Registration />} />
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="/dashboard" element={<ManageOrders />} />
           <Route path="/dashboard/addproduct" element={<AddProduct />} />

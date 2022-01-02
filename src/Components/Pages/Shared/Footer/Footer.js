@@ -5,7 +5,7 @@ import { Container, TextField, Typography } from '@mui/material';
 
 const Footer = () => {
     return (
-        <Box sx={{ backgroundColor: '#0B1C2E', color: 'white', marginTop: '150px' }}>
+        <Box sx={{ backgroundColor: '#0B1C2E', color: 'white', marginTop: '150px', paddingTop: '80px' }}>
             <Container>
                 <Grid container spacing={2} sx={{ paddingBottom: '15px' }}>
                     <Grid item xs={12} sm={6} md={5} sx={{ textAlign: 'left' }}>

@@ -10,7 +10,7 @@ import {
   Rating,
   Typography,
 } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import "./Products.css";
 import { useSelector } from "react-redux";
@@ -19,6 +19,7 @@ import { addCart, loadProduct } from "../../../../Redux/productsSlice";
 import { Link } from "react-router-dom";
 
 const Products = () => {
+  const [quantity, setQuantity] = useState(1)
   const ProductData = useSelector((state) => state.products.product);
   const cart = useSelector((state) => state.products.cart);
   const dispatch = useDispatch();
@@ -32,16 +33,18 @@ const Products = () => {
   }, []);
 
   const addToCart = (item) => {
-    dispatch(addCart(item));
+    dispatch(addCart({ ...item, quantity }));
   };
+
   console.log(cart);
   return (
     <Container sx={{ marginTop: "50px" }}>
       <Grid container spacing={{ xs: 2, md: 4 }}>
         {ProductData.map((item) => (
           <Grid item xs={12} sm={6} md={3} className="cartMain" key={item._id}>
-            <Link style={{ textDecoration: 'none' }} to={`/products/${item._id}`}>
-              <Card sx={{ maxWidth: 345 }} className="card childcart">
+
+            <Card sx={{ maxWidth: 345 }} className="card childcart">
+              <Link style={{ textDecoration: 'none' }} to={`/products/${item._id}`}>
                 <CardMedia
                   component="img"
                   alt="green iguana"
@@ -66,7 +69,7 @@ const Products = () => {
                     sx={{ color: "text.secondary" }}
                     component="div"
                   >
-                    ৳ {item.price}
+                    ৳ {item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                   </Typography>
                   <Typography gutterBottom variant="h5" component="div">
                     <Rating
@@ -77,19 +80,22 @@ const Products = () => {
                     />
                   </Typography>
                 </CardContent>
+              </Link>
+              <CardActions sx={{ justifyContent: "center" }}>
+                <div className="addCard">
+                  <Button variant="contained" onClick={() => addToCart(item)}>
+                    {" "}
+                    <AddShoppingCartIcon sx={{ marginRight: "15px" }} />
+                    ADD TO CART
+                  </Button>
+                </div>
+              </CardActions>
 
-                <CardActions sx={{ justifyContent: "center" }}>
-                  <div className="addCard">
-                    <Button variant="contained" onClick={() => addToCart(item)}>
-                      {" "}
-                      <AddShoppingCartIcon sx={{ marginRight: "15px" }} />
-                      ADD TO CART
-                    </Button>
-                  </div>
-                </CardActions>
 
-              </Card>
-            </Link>
+            </Card>
+
+
+
           </Grid>
         ))}
       </Grid>

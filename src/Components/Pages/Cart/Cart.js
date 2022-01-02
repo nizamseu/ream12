@@ -21,6 +21,8 @@ const Cart = () => {
     const cart = useSelector(state => state.products.cart)
     const dispatch = useDispatch()
 
+
+
     // const handleDelete = (pd) => {
 
     //     dispatch(deleteProduct(pd))
@@ -39,7 +41,8 @@ const Cart = () => {
                     <Grid item xs={12} md={8}>
                         {cart.map(pd =>
                             <Box style={{ borderBottom: "1px solid gray", marginBottom: '15px' }}>
-                                <Card sx={{ display: 'flex', justifyContent: 'space-between', paddingY: '20px' }}>
+                                <Card sx={{ display: 'flex', sm: { flexDirection: "column" }, justifyContent: 'space-between', paddingY: '20px' }}>
+
                                     <Box sx={{ display: 'flex' }}>
                                         <CardMedia
                                             component="img"
@@ -59,16 +62,19 @@ const Cart = () => {
                                             </CardContent>
                                         </Box>
                                     </Box>
+
+
                                     <Box>
                                         <Box >
-                                            <RemoveOutlinedIcon onClick={() => handleQuantity("dec")} />
-                                            <span style={{ border: '1px solid gray', padding: '0 6px', fontWeight: "bold", position: 'relative', bottom: '8px', margin: '0 5px' }}>{0}</span>
-                                            <AddOutlinedIcon onClick={() => handleQuantity("inc")} />
+                                            {/* <RemoveOutlinedIcon onClick={() => handleQuantity("dec")} /> */}
+                                            <span style={{ border: '1px solid gray', padding: '0 6px', fontWeight: "bold", position: 'relative', bottom: '8px', margin: '0 5px' }}>Quantity: {pd.quantity}</span>
+                                            {/* <AddOutlinedIcon onClick={() => handleQuantity("inc")} /> */}
                                         </Box>
-                                        <Typography variant="h5" sx={{ marginTop: '20px' }}>${pd.quantity * pd.price}</Typography>
+                                        <Typography variant="h5" sx={{ marginTop: '20px' }}> ৳ {parseInt(pd.price * pd.quantity).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Typography>
 
-                                        <Paper variant="outlined"> <DeleteForeverIcon fontSize="large" style={{ marginTop: "10px", marginLeft: '20px' }} /></Paper>
+                                        <Button sx={{ margin: '30px 0 0 30px' }}>  <DeleteForeverIcon fontSize="large" /></Button>
                                     </Box>
+
 
 
                                 </Card>

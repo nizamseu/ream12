@@ -6,6 +6,7 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useDispatch, useSelector } from 'react-redux';
 import Navbar from '../Shared/Navbar/Navbar';
+import { addCart } from '../../../Redux/productsSlice';
 
 
 const ProductDetails = () => {
@@ -17,11 +18,11 @@ const ProductDetails = () => {
     const product = ProductData.find(pd => pd._id === id)
     console.log(product, "pd", id)
 
-    // const handleClick = () => {
-    //     dispatch(addProduct({ ...product, quantity }))
-    // }
-    // onClick={handleClick}
-    // console.log(ProductData)
+    const handleClick = () => {
+        dispatch(addCart({ ...product, quantity }))
+    }
+
+    console.log(ProductData)
     const handleQuantity = (type) => {
         if (type === "dec") {
             quantity > 1 && setQuantity(quantity - 1)
@@ -30,7 +31,7 @@ const ProductDetails = () => {
             setQuantity(quantity + 1)
         }
     }
-
+    console.log(product.price, "log price")
     return (
         <Box>
             <Navbar />
@@ -50,14 +51,14 @@ const ProductDetails = () => {
                         <br />
                         <Rating name="read-only" value={product?.rating ? product.rating : 5} readOnly />
                         <br />
-                        <Typography variant="h4">${product.price}</Typography>
+                        <Typography variant="h4">${product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Typography>
                         <br />
                         <Typography variant="body3" sx={{ color: "secondary" }}>{product.description}</Typography>
 
                         <Box style={{ marginTop: "20px" }} >
                             <RemoveCircleIcon onClick={() => handleQuantity("dec")} /><span style={{ border: '1px solid gray', padding: '0 6px', fontWeight: "bold", position: 'relative', bottom: '8px', margin: '0 5px' }}>{quantity}</span> <AddCircleIcon onClick={() => handleQuantity("inc")} />
                         </Box>
-                        <Button sx={{ backgroundColor: "#F37539", color: "black", marginTop: "20px" }} variant="outlined">ADD to Cart</Button>
+                        <Button sx={{ backgroundColor: "#F37539", color: "black", marginTop: "20px" }} onClick={handleClick} variant="outlined">ADD to Cart</Button>
                     </Box>
                 </Grid>
                 {/* style={{ position: 'absolute', top:'20px'}} */}

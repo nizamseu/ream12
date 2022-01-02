@@ -10,7 +10,7 @@ import {
     Rating,
     Typography,
 } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '../Shared/Navbar/Navbar';
 import Footer from '../Shared/Footer/Footer';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,10 +18,11 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { addCart } from '../../../Redux/productsSlice';
 
 const Products = () => {
+    const [quantity, setQuantity] = useState(1)
     const ProductData = useSelector((state) => state.products.product);
     const dispatch = useDispatch();
     const addToCart = (item) => {
-        dispatch(addCart(item));
+        dispatch(addCart({ ...item, quantity }));
     };
     return (
         <Box>
