@@ -13,13 +13,13 @@ const ManageOrders = () => {
     const [loading, isLoading] = useState(false);
 
     useEffect(()=> {
-        fetch('')
+        fetch('https://whispering-waters-68649.herokuapp.com/customersinfo')
         .then(res => res.json())
         .then(data => setAllOrders(data))
     }, [loading]);
 
     const handleUpdateStatus = (id) => {
-        fetch(` ${id}`, {
+        fetch(`https://whispering-waters-68649.herokuapp.com/customersinfo${id}`, {
             method: 'PUT',
             headers:{
                 'content-type':'application/json'
