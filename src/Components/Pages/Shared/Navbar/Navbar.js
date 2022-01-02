@@ -32,6 +32,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 const Navbar = () => {
   const { loginWithGoogle, user, logOut } = useAuth();
+  console.log(user);
   const cart = useSelector((state) => state.products.cart);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -128,6 +129,9 @@ const Navbar = () => {
             </MenuItem>
             <MenuItem>
               <Link to={"/upcomming"}>Upcomming</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to={"/checkout"}>Checkout</Link>
             </MenuItem>
             <MenuItem>
               {/* <Button onClick={loginWithGoogle} color="error">

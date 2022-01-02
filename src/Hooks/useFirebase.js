@@ -11,10 +11,12 @@ import {
 } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
 
 initializeAuthentication();
 
 const useFirebase = () => {
+  const dispatch = useDispatch();
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
@@ -69,7 +71,6 @@ const useFirebase = () => {
 
   // login with email and password
   const login = (data) => {
-    console.log(data);
     setIsLoading(true);
     const { email, password } = data;
     signInWithEmailAndPassword(auth, email, password)

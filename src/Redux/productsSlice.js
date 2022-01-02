@@ -17,10 +17,13 @@ export const ProductsSlice = createSlice({
       ];
       state.cart = arrayUniqueByKey;
     },
+    clearCart: (state, action) => {
+      state.cart = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { loadProduct, addCart } = ProductsSlice.actions;
+export const { loadProduct, addCart, clearCart } = ProductsSlice.actions;
 
 export default ProductsSlice.reducer;
