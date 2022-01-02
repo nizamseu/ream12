@@ -43,15 +43,20 @@ const Products = () => {
               <CardMedia
                 component="img"
                 alt="green iguana"
-                height="140"
+                className="cardImage"
                 image={item.img}
               />
               <CardContent>
-                {/* <Typography gutterBottom variant="h6" sx={{ color: 'text.secondary' }} component="div">
-                                        Lizard
-                                    </Typography> */}
+                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <Typography gutterBottom variant="caption" sx={{ color: 'text.secondary' }} component="div">
+                    {item.model}
+                  </Typography>
+                  <Typography gutterBottom variant="caption" sx={{ color: 'text.secondary' }} component="div">
+                    Serial: {item.serial}
+                  </Typography>
+                </Box>
                 <Typography gutterBottom variant="h5" component="div">
-                  {item.model}
+                  {item.name}
                 </Typography>
                 <Typography
                   gutterBottom
@@ -59,7 +64,7 @@ const Products = () => {
                   sx={{ color: "text.secondary" }}
                   component="div"
                 >
-                  ${item.price}
+                  ৳ {item.price}
                 </Typography>
                 <Typography gutterBottom variant="h5" component="div">
                   <Rating
@@ -70,15 +75,17 @@ const Products = () => {
                   />
                 </Typography>
               </CardContent>
-              <div className="addCard">
-                <CardActions sx={{ justifyContent: "center" }}>
+
+              <CardActions sx={{ justifyContent: "center" }}>
+                <div className="addCard">
                   <Button variant="contained" onClick={() => addToCart(item)}>
                     {" "}
                     <AddShoppingCartIcon sx={{ marginRight: "15px" }} />
                     ADD TO CART
                   </Button>
-                </CardActions>
-              </div>
+                </div>
+              </CardActions>
+
             </Card>
           </Grid>
         ))}
