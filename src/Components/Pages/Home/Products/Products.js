@@ -38,7 +38,7 @@ const Products = () => {
     <Container sx={{ marginTop: "50px" }}>
       <Grid container spacing={{ xs: 2, md: 4 }}>
         {ProductData.map((item) => (
-          <Grid item xs={12} sm={6} md={3} className="cartMain">
+          <Grid item xs={12} sm={6} md={3} className="cartMain" key={item._id}>
             <Card sx={{ maxWidth: 345 }} className="card childcart">
               <CardMedia
                 component="img"
@@ -55,7 +55,7 @@ const Products = () => {
                     Serial: {item.serial}
                   </Typography>
                 </Box>
-                <Typography gutterBottom variant="h5" component="div">
+                <Typography gutterBottom variant="h5" sx={{ fontWeight: 'bold' }} component="div">
                   {item.name}
                 </Typography>
                 <Typography
