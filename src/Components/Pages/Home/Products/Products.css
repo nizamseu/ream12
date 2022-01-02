@@ -2,7 +2,17 @@
   display: none;
 }
 
+.card {
+  padding-bottom: 20px;
+}
+
 .card:hover .addCard {
   display: block;
-  overflow: hidden;
+  position: absolute;
+}
+
+.cardImage {
+  height: 240px;
+  width: 265px;
+  object-fit: fill !important;
 }
