@@ -19,8 +19,10 @@ import { addCart, loadProduct } from "../../../../Redux/productsSlice";
 import { Link } from "react-router-dom";
 
 const Products = () => {
-  const [quantity, setQuantity] = useState(1)
+  const [quantity, setQuantity] = useState(1);
   const ProductData = useSelector((state) => state.products.product);
+  const [filterData, setFilterData] = useState("");
+  const [data, setdata] = useState([]);
   const cart = useSelector((state) => state.products.cart);
   const dispatch = useDispatch();
 
@@ -28,6 +30,7 @@ const Products = () => {
     fetch("https://whispering-waters-68649.herokuapp.com/electronicscollection")
       .then((res) => res.json())
       .then((data) => {
+        setdata(data);
         dispatch(loadProduct(data));
       });
   }, []);
@@ -36,14 +39,40 @@ const Products = () => {
     dispatch(addCart({ ...item, quantity }));
   };
 
-  return (
-    <Container sx={{ marginTop: "50px" }}>
-      <Grid container spacing={{ xs: 2, md: 4 }}>
-        {ProductData.map((item) => (
-          <Grid item xs={12} sm={6} md={3} className="cartMain" key={item._id}>
+  useEffect(() => {
+    const restData = ProductData.filter((item) => item.category === filterData);
+    setdata(restData);
+  }, [filterData]);
 
+  const handleFilter = (name) => {
+    setFilterData(name);
+  };
+  console.log(ProductData);
+  return (
+    <Container sx={{ marginTop: "50px", button: { mx: 1 } }}>
+      <Box sx={{ my: 3 }}>
+        <Button variant="outlined" onClick={() => handleFilter("TV")}>
+          TV
+        </Button>
+        <Button variant="outlined" onClick={() => handleFilter("laptop")}>
+          laptop
+        </Button>
+        <Button variant="outlined" onClick={() => handleFilter("Camera")}>
+          camera
+        </Button>
+        <Button variant="outlined" onClick={() => handleFilter("Smart Phone")}>
+          Phone
+        </Button>
+      </Box>
+
+      <Grid container spacing={{ xs: 2, md: 4 }}>
+        {data?.map((item) => (
+          <Grid item xs={12} sm={6} md={3} className="cartMain" key={item._id}>
             <Card sx={{ maxWidth: 345 }} className="card childcart">
-              <Link style={{ textDecoration: 'none' }} to={`/products/${item._id}`}>
+              <Link
+                style={{ textDecoration: "none" }}
+                to={`/products/${item._id}`}
+              >
                 <CardMedia
                   component="img"
                   alt="green iguana"
@@ -85,7 +114,10 @@ const Products = () => {
                     sx={{ color: "text.secondary" }}
                     component="div"
                   >
-                    ৳ {item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    ৳{" "}
+                    {item.price
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                   </Typography>
                   <Typography gutterBottom variant="h5" component="div">
                     <Rating
@@ -106,10 +138,7 @@ const Products = () => {
                   </Button>
                 </div>
               </CardActions>
-
-
             </Card>
-
           </Grid>
         ))}
       </Grid>
