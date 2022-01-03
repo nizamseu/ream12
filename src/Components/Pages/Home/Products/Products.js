@@ -52,15 +52,32 @@ const Products = () => {
                   image={item.img}
                 />
                 <CardContent>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Typography gutterBottom variant="caption" sx={{ color: 'text.secondary' }} component="div">
+                  <Box
+                    sx={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <Typography
+                      gutterBottom
+                      variant="caption"
+                      sx={{ color: "text.secondary" }}
+                      component="div"
+                    >
                       {item.model}
                     </Typography>
-                    <Typography gutterBottom variant="caption" sx={{ color: 'text.secondary' }} component="div">
+                    <Typography
+                      gutterBottom
+                      variant="caption"
+                      sx={{ color: "text.secondary" }}
+                      component="div"
+                    >
                       Serial: {item.serial}
                     </Typography>
                   </Box>
-                  <Typography gutterBottom variant="h5" sx={{ fontWeight: 'bold' }} component="div">
+                  <Typography
+                    gutterBottom
+                    variant="h5"
+                    sx={{ fontWeight: "bold" }}
+                    component="div"
+                  >
                     {item.name}
                   </Typography>
                   <Typography
@@ -93,7 +110,6 @@ const Products = () => {
 
 
             </Card>
-
 
 
           </Grid>

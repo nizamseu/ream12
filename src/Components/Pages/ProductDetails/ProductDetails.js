@@ -34,7 +34,7 @@ const ProductDetails = () => {
     console.log(product.price, "log price")
     return (
         <Box>
-            <Navbar />
+
             <Grid container spacing={2}>
                 <Grid item xs={12} md={6}>
                     <CardMedia

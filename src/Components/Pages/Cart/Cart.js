@@ -12,6 +12,7 @@ import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import Navbar from '../Shared/Navbar/Navbar';
+import { deleteToCart } from '../../../Redux/productsSlice';
 
 
 
@@ -21,19 +22,33 @@ const Cart = () => {
     const cart = useSelector(state => state.products.cart)
     const dispatch = useDispatch()
 
-
-
-    // const handleDelete = (pd) => {
-
-    //     dispatch(deleteProduct(pd))
-    // }
-    // onClick={() => handleDelete(pd)}
-    const handleQuantity = () => {
-
+    const subTotal = cart.reduce((a, b) => a + b.price * b.quantity, 0);
+    let text;
+    let shipping;
+    if (subTotal > 0) {
+        text = 10
     }
+    if (subTotal < 500) {
+        shipping = 100
+    } else if (subTotal > 50000) {
+        shipping = 50
+    }
+    else if (subTotal < 50000) {
+        shipping = 50
+    }
+    else if (subTotal > 500000) {
+        shipping = 0
+    }
+
+    const total = subTotal + text + shipping
+
+    const handleDelete = (pd) => {
+        dispatch(deleteToCart(pd))
+    }
+
+
     return (
         <Box>
-            <Navbar />
             <Box style={{ marginTop: "100px" }}>
                 <Typography sx={{ textAlign: "center" }} variant="h4">YOUR BAG</Typography>
                 <Grid container spacing={2} style={{ marginTop: '50px' }}>
@@ -78,7 +93,7 @@ const Cart = () => {
                                         </Box>
                                         <Typography variant="h5" sx={{ marginTop: '10px' }}> ৳ {parseInt(pd.price * pd.quantity).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Typography>
 
-                                        <Button variant="contained" color="error" sx={{ margin: '10px 0 0 0' }}>REMOVE</Button>
+                                        <Button onClick={() => handleDelete(pd)} variant="contained" color="error" sx={{ margin: '10px 0 0 0' }}>REMOVE</Button>
                                     </Box>
 
 
@@ -101,18 +116,24 @@ const Cart = () => {
                                     <TableBody>
                                         <TableRow>
 
-                                            <TableCell >Subtotal</TableCell>
-                                            <TableCell align="right">${cart.total}</TableCell>
+                                            <TableCell >SubsubTotal</TableCell>
+                                            <TableCell align="right">৳ {subTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</TableCell>
                                         </TableRow>
                                         <TableRow>
 
                                             <TableCell>Tax</TableCell>
-                                            <TableCell align="right">$10</TableCell>
+                                            <TableCell align="right">৳ {text}</TableCell>
+
+                                        </TableRow>
+                                        <TableRow>
+
+                                            <TableCell>Shipping</TableCell>
+                                            <TableCell align="right">৳ {shipping}</TableCell>
 
                                         </TableRow>
                                         <TableRow >
-                                            <TableCell sx={{ fontWeight: "bold" }} >Total</TableCell>
-                                            <TableCell sx={{ fontWeight: "bold" }} align="right">${cart.total + 10}</TableCell>
+                                            <TableCell sx={{ fontWeight: "bold" }} >subTotal</TableCell>
+                                            <TableCell sx={{ fontWeight: "bold" }} align="right">৳ {total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</TableCell>
                                         </TableRow>
                                         <Box sx={{ justifyContent: 'center', marginTop: "30px", marginLeft: "110px" }}>
                                             <Button variant="contained" sx={{ backgroundColor: " black", justifyContent: 'center', }}>PROCEED TO CHECKOUT</Button>
