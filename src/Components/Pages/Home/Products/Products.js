@@ -41,7 +41,9 @@ const Products = () => {
 
   useEffect(() => {
     const restData = ProductData.filter((item) => item.category === filterData);
-    setdata(restData);
+    if (filterData !== "all") {
+      setdata(restData);
+    } else setdata(ProductData);
   }, [filterData]);
 
   const handleFilter = (name) => {
@@ -51,6 +53,9 @@ const Products = () => {
   return (
     <Container sx={{ marginTop: "50px", button: { mx: 1 } }}>
       <Box sx={{ my: 3 }}>
+        <Button variant="outlined" onClick={() => handleFilter("all")}>
+          All
+        </Button>
         <Button variant="outlined" onClick={() => handleFilter("TV")}>
           TV
         </Button>
