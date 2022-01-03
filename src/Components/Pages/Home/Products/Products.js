@@ -36,7 +36,6 @@ const Products = () => {
     dispatch(addCart({ ...item, quantity }));
   };
 
-  console.log(cart);
   return (
     <Container sx={{ marginTop: "50px" }}>
       <Grid container spacing={{ xs: 2, md: 4 }}>
@@ -110,7 +109,6 @@ const Products = () => {
 
 
             </Card>
-
 
           </Grid>
         ))}
