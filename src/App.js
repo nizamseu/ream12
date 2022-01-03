@@ -11,12 +11,12 @@ import MakeAdmin from "./Components/Pages/Dashboard/MakeAdmin/MakeAdmin";
 import MangeProducts from "./Components/Pages/Dashboard/ManageProducts/MangeProducts";
 import ManageUser from "./Components/Pages/Dashboard/ManageUser/ManageUser";
 import MyOrders from "./Components/Pages/Dashboard/MyOrders/MyOrders";
-
 import Navbar from "./Components/Pages/Shared/Navbar/Navbar";
 import Upcomming from "./Components/Upcomming/Upcomming";
 import Login from "./Components/Login/Login/Login";
 import Register from "./Components/Login/Registration/Registration";
-
+import PrivateRoute from "./Components/Login/PrivateRoute/PrivateRoute";
+import CheckOut from "./Components/Pages/Checkout/CheckOut";
 function App() {
   return (
     <BrowserRouter className="">
@@ -30,8 +30,22 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />
         <Route path="/Registration" element={<Register />} />
-
-        <Route path="/dashboard" element={<Dashboard />}>
+        <Route
+          path="/checkout"
+          element={
+            <PrivateRoute>
+              <CheckOut />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        >
           <Route path="/dashboard" element={<ManageOrders />} />
           <Route path="/dashboard/myOrders" element={<MyOrders />} />
           <Route path="/dashboard/manageOrders" element={<ManageOrders />} />

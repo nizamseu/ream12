@@ -1,19 +1,21 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
-import Drawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import { NavLink, Outlet } from 'react-router-dom';
-import { Button } from '@mui/material';
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import CssBaseline from "@mui/material/CssBaseline";
+import Divider from "@mui/material/Divider";
+import Drawer from "@mui/material/Drawer";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import { NavLink, Outlet } from "react-router-dom";
+import { Button } from "@mui/material";
+import useAuth from "../../../../Hooks/useAuth";
 
 const drawerWidth = 200;
 
 function Dashboard(props) {
+  const { logOut } = useAuth();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -26,32 +28,66 @@ function Dashboard(props) {
       <Toolbar />
       <Divider />
       {/* link here */}
-      <Box sx={{ml: 3}}>
-        <NavLink style={{textDecoration: 'none'}} to="/Home"><i className="fas fa-home"></i> Home</NavLink> <br />
+      <Box sx={{ ml: 3 }}>
+        <NavLink style={{ textDecoration: "none" }} to="/Home">
+          <i className="fas fa-home"></i> Home
+        </NavLink>{" "}
+        <br />
       </Box>
       <Divider />
-      
-      <Box sx={{ml: 3}}>
-        <NavLink style={{textDecoration: 'none'}} to="/dashboard/myOrders"><i className="fab fa-first-order-alt"></i> My Orders</NavLink> <br />
 
-        <NavLink style={{textDecoration: 'none'}} to="/dashboard/addProduct"><i className="far fa-plus-square"></i> Add Product</NavLink> <br />
-        <NavLink style={{textDecoration: 'none'}} to="/dashboard/manageProduct"><i className="fas fa-tasks"></i> Manage Products</NavLink> <br />
-        <NavLink style={{textDecoration: 'none'}} to="/dashboard/manageOrders"><i className="fab fa-product-hunt"></i> Manage Orders</NavLink> <br />
-        <NavLink style={{textDecoration: 'none'}} to="/dashboard/makeAdmin"><i className="fas fa-user-shield"></i> Make Admin</NavLink> <br />
-        <NavLink style={{textDecoration: 'none'}} to="/dashboard/manageUser"><i className="fas fa-user-shield"></i> Manage User</NavLink>
-        
+      <Box sx={{ ml: 3 }}>
+        <NavLink style={{ textDecoration: "none" }} to="/dashboard/myOrders">
+          <i className="fab fa-first-order-alt"></i> My Orders
+        </NavLink>{" "}
+        <br />
+        <NavLink style={{ textDecoration: "none" }} to="/dashboard/addProduct">
+          <i className="far fa-plus-square"></i> Add Product
+        </NavLink>{" "}
+        <br />
+        <NavLink
+          style={{ textDecoration: "none" }}
+          to="/dashboard/manageProduct"
+        >
+          <i className="fas fa-tasks"></i> Manage Products
+        </NavLink>{" "}
+        <br />
+        <NavLink
+          style={{ textDecoration: "none" }}
+          to="/dashboard/manageOrders"
+        >
+          <i className="fab fa-product-hunt"></i> Manage Orders
+        </NavLink>{" "}
+        <br />
+        <NavLink style={{ textDecoration: "none" }} to="/dashboard/makeAdmin">
+          <i className="fas fa-user-shield"></i> Make Admin
+        </NavLink>{" "}
+        <br />
+        <NavLink style={{ textDecoration: "none" }} to="/dashboard/manageUser">
+          <i className="fas fa-user-shield"></i> Manage User
+        </NavLink>
       </Box>
-        
+
       <Divider />
-      <Button style={{backgroundColor: '#0B1C2E', marginTop: '10px', marginLeft: '20px'}} variant="contained"><i className="fas fa-sign-out-alt mr-3"></i> Log Out</Button>
-      
+      <Button
+        onClick={logOut}
+        style={{
+          backgroundColor: "#0B1C2E",
+          marginTop: "10px",
+          marginLeft: "20px",
+        }}
+        variant="contained"
+      >
+        <i className="fas fa-sign-out-alt mr-3"></i> Log Out
+      </Button>
     </div>
   );
 
-  const container = window !== undefined ? () => window().document.body : undefined;
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -67,7 +103,7 @@ function Dashboard(props) {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
+            sx={{ mr: 2, display: { sm: "none" } }}
           >
             <MenuIcon />
           </IconButton>
@@ -91,8 +127,11 @@ function Dashboard(props) {
             keepMounted: true, // Better open performance on mobile.
           }}
           sx={{
-            display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            display: { xs: "block", sm: "none" },
+            "& .MuiDrawer-paper": {
+              boxSizing: "border-box",
+              width: drawerWidth,
+            },
           }}
         >
           {drawer}
@@ -100,8 +139,11 @@ function Dashboard(props) {
         <Drawer
           variant="permanent"
           sx={{
-            display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            display: { xs: "none", sm: "block" },
+            "& .MuiDrawer-paper": {
+              boxSizing: "border-box",
+              width: drawerWidth,
+            },
           }}
           open
         >
@@ -110,7 +152,11 @@ function Dashboard(props) {
       </Box>
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          width: { sm: `calc(100% - ${drawerWidth}px)` },
+        }}
       >
         <Toolbar />
         <Outlet></Outlet>
