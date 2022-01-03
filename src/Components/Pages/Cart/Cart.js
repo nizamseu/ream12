@@ -28,19 +28,21 @@ const Cart = () => {
     if (subTotal > 0) {
         text = 10
     }
-    if (subTotal < 500) {
+
+    if (subTotal < 500 && subTotal > 1) {
         shipping = 100
-    } else if (subTotal > 50000) {
+    } else if (subTotal > 50000 && subTotal < 500000) {
         shipping = 50
     }
-    else if (subTotal < 50000) {
-        shipping = 50
-    }
+
     else if (subTotal > 500000) {
         shipping = 0
     }
 
-    const total = subTotal + text + shipping
+    let total = subTotal + text + shipping
+    total = total ? total : 0
+    shipping = shipping ? shipping : 0
+    text = text ? text : 0
 
     const handleDelete = (pd) => {
         dispatch(deleteToCart(pd))
