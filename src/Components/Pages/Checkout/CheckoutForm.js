@@ -33,7 +33,7 @@ const CheckoutForm = ({ total }) => {
       type: "card",
       card: elements.getElement(CardElement),
     });
-    console.log(paymentMethod);
+
     if (error) {
       setPaymentError(error?.message);
       setPaymentSuccess(null);

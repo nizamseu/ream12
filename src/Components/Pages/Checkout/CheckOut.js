@@ -183,7 +183,7 @@ const CheckOut = () => {
       >
         <Box>
           <Elements stripe={stripePromise}>
-            <CheckoutForm price={total} customerName={user.displayName} />
+            <CheckoutForm total={total} />
           </Elements>
         </Box>
       </Container>
