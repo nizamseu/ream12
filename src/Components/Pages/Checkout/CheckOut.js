@@ -9,7 +9,8 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import useAuth from "../../../Hooks/useAuth";
-
+import { useDispatch } from "react-redux";
+import { clearCart } from "../../../Redux/productsSlice";
 const stripePromise = loadStripe(
   "pk_test_51HOn6uDksjzqqFPWpU9KvM3jHsl0Cg4wpwvYlWybOzbCah2U3osWjzMiUXmHzwnOL2HZhZH4AovlXccRH3vHW6Nx003QpggDoB"
 );
@@ -17,6 +18,8 @@ const CheckOut = () => {
   const [formSwitch, setFormSwitch] = useState(true);
   const cart = useSelector((state) => state?.products.cart);
   const { user } = useAuth();
+
+  // const dispatch = useDispatch();
   const subtotal = cart
     .reduce((a, b) => a + b.price * b.quantity, 0)
     .toFixed(2);
@@ -33,7 +36,27 @@ const CheckOut = () => {
   const onSubmit = (data) => {
     data.email = user.email;
     data.status = "pending";
-    console.log(data);
+
+    const url = "https://whispering-waters-68649.herokuapp.com/customersinfo";
+
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ data, cart }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("added", data);
+        // if (data.insertedId) {
+        //   dispatch(clearCart([]));
+        // }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
     setFormSwitch(false);
   };
 
@@ -160,7 +183,7 @@ const CheckOut = () => {
       >
         <Box>
           <Elements stripe={stripePromise}>
-            <CheckoutForm />
+            <CheckoutForm price={total} customerName={user.displayName} />
           </Elements>
         </Box>
       </Container>
