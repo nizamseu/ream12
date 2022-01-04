@@ -6,14 +6,16 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import useAuth from '../../../../Hooks/useAuth';
 import { Alert, Button, Typography } from '@mui/material';
 
 const MyOrders = () => {
+    const {user,loading} = useAuth();
     const [orders, setOrders] = useState([]);
     const [success, setSuccess] = useState(false);
 
     useEffect(()=> {
-        fetch(` `)
+        fetch(`https://whispering-waters-68649.herokuapp.com/customersinfo?data.email=${user.email}`)
         .then(res => res.json())
         .then(data => setOrders(data))
     }, []);
@@ -21,7 +23,7 @@ const MyOrders = () => {
     const handleDeleteOrder = (id) => {
         const isDelete = window.confirm("Are You Sure to Delete?");
         if(isDelete){
-            fetch(` ${id}`, {
+            fetch(`https://whispering-waters-68649.herokuapp.com/customersinfo/${id}`, {
             method: 'DELETE',
             })
             .then(res => res.json())
@@ -46,8 +48,7 @@ const MyOrders = () => {
                 <TableRow>
                     <TableCell>Index</TableCell>
                     <TableCell>Name</TableCell>
-                    <TableCell>Price</TableCell>
-                    <TableCell>Description</TableCell>
+                    <TableCell>Email</TableCell>
                     <TableCell>Action</TableCell>
                 </TableRow>
                 </TableHead>
@@ -60,11 +61,11 @@ const MyOrders = () => {
                     <TableCell component="th" scope="row">
                         {index + 1}
                     </TableCell>
-                    <TableCell component="th" scope="row">
+                    {/* <TableCell component="th" scope="row">
                         {row.model}
-                    </TableCell>
-                    <TableCell>{row.price}</TableCell>
-                    <TableCell>{row.desc}</TableCell>
+                    </TableCell> */}
+                    <TableCell>{row.cart[0]?.name}</TableCell>
+                    <TableCell>{row.data?.email}</TableCell>
                     <TableCell>
                         <Button onClick={() => handleDeleteOrder(row._id)} style={{backgroundColor: '#4298F9'}} variant="contained">Delete</Button>
                     </TableCell>
