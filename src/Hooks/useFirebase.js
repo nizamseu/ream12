@@ -59,6 +59,7 @@ const useFirebase = () => {
     console.log(email, password);
     createUserWithEmailAndPassword(auth, email, password)
       .then((result) => {
+        saveUser(email,name,'POST')
         profileUpdate(name);
       })
       .catch((error) => {
@@ -109,6 +110,20 @@ const useFirebase = () => {
     });
     return unsubscribe;
   }, [auth]);
+
+  // Saving user info
+  const saveUser = (email,displayName,method) =>{
+    const user = {email,displayName};
+    fetch('https://whispering-waters-68649.herokuapp.com/customers',{
+        method: method,
+        headers:{
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    })
+    .then()
+}
+
   return { loginWithGoogle, isLoading, logOut, createUser, user, login };
 };
 

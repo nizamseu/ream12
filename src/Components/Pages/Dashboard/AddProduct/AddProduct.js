@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 const AddProduct = () => {
     const [product, setProduct] = useState({});
-    // const [success, setSuccess] = useState(false);
+    const [success, setSuccess] = useState(false);
 
     const handleOnBlur = e => {
         const field = e.target.name;
@@ -15,23 +15,23 @@ const AddProduct = () => {
 
     const handleFormSubmit = e => {
         console.log(product);
-        // const addProduct = {
-        //     ...product
-        // }
+            const addProduct = {
+                ...product
+            }
 
         // send to database
 
-        // fetch('', {
-        //     method: 'POST',
-        //     headers: {'content-type':'application/json'},
-        //     body: JSON.stringify(addProduct),
-        // })
-        // .then(res => res.json())
-        // .then(data => {
-        //     if(data.insertedId){
-        //         setSuccess(true);
-        //     }
-        // })
+            fetch('https://whispering-waters-68649.herokuapp.com/electronicscollection', {
+                method: 'POST',
+                headers: {'content-type':'application/json'},
+                body: JSON.stringify(addProduct),
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.insertedId){
+                    setSuccess(true);
+                }
+            })
         e.preventDefault();
     }
     return (
