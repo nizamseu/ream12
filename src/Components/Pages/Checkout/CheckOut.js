@@ -19,6 +19,8 @@ const CheckOut = () => {
   const cart = useSelector((state) => state?.products.cart);
   const { user } = useAuth();
 
+  const cartaData = Object.assign({}, cart);
+  console.log(cart);
   // const dispatch = useDispatch();
   const subtotal = cart
     .reduce((a, b) => a + b.price * b.quantity, 0)
@@ -36,7 +38,8 @@ const CheckOut = () => {
   const onSubmit = (data) => {
     data.email = user.email;
     data.status = "pending";
-
+    data.cart = cart;
+    console.log("jamela", data);
     const url = "https://whispering-waters-68649.herokuapp.com/customersinfo";
 
     fetch(url, {
@@ -44,7 +47,7 @@ const CheckOut = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ data, cart }),
+      body: JSON.stringify(data),
     })
       .then((res) => res.json())
       .then((data) => {

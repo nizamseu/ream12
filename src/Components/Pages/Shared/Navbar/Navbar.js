@@ -17,6 +17,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useAuth from "../../../../Hooks/useAuth";
+import logo from "../../../../images/logo2.png";
 
 const pages = ["Products", "Registration", "Upcomming"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -63,7 +64,19 @@ const Navbar = () => {
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
           >
             <Link style={{ textDecoration: "none", color: "white" }} to="/home">
-              LOGO
+              {/* <img width="100px" height="70px" src={logo} alt="" /> */}
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <strong style={{ color: "black" }}> fRYn</strong>
+
+                <small style={{ fontSize: "13px" }}> e shop</small>
+              </Box>
             </Link>
           </Typography>
 
@@ -93,6 +106,7 @@ const Navbar = () => {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
+                a: { textDecoration: "none", color: "black" },
                 display: { xs: "block", md: "none" },
               }}
             >
@@ -120,7 +134,13 @@ const Navbar = () => {
             LOGO
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          <Box
+            sx={{
+              a: { textDecoration: "none", color: "white" },
+              flexGrow: 1,
+              display: { xs: "none", md: "flex" },
+            }}
+          >
             <MenuItem>
               <Link to={"/products"}>Products</Link>
             </MenuItem>
@@ -130,9 +150,7 @@ const Navbar = () => {
             <MenuItem>
               <Link to={"/upcomming"}>Upcomming</Link>
             </MenuItem>
-            <MenuItem>
-              <Link to={"/checkout"}>Checkout</Link>
-            </MenuItem>
+
             <MenuItem>
               {/* <Button onClick={loginWithGoogle} color="error">
                 Login
@@ -156,7 +174,7 @@ const Navbar = () => {
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: "45px" }}
+              sx={{ a: { textDecoration: "none", color: "black" }, mt: "45px" }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{

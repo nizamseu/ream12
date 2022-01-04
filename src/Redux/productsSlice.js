@@ -18,7 +18,7 @@ export const ProductsSlice = createSlice({
       state.cart = arrayUniqueByKey;
     },
     deleteToCart: (state, action) => {
-      state.cart = state.cart.filter(pd => pd._id !== action.payload._id)
+      state.cart = state.cart.filter((pd) => pd._id !== action.payload._id);
     },
     clearCart: (state, action) => {
       state.cart = action.payload;
@@ -27,6 +27,7 @@ export const ProductsSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { loadProduct, addCart, deleteToCart, clearCart } = ProductsSlice.actions;
+export const { loadProduct, addCart, deleteToCart, clearCart } =
+  ProductsSlice.actions;
 
 export default ProductsSlice.reducer;

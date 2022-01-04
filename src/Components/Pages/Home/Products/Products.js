@@ -30,7 +30,8 @@ const Products = () => {
     fetch("https://whispering-waters-68649.herokuapp.com/electronicscollection")
       .then((res) => res.json())
       .then((data) => {
-        setdata(data);
+        const newData = data.sort((a, b) => 0.5 - Math.random());
+        setdata(newData);
         dispatch(loadProduct(data));
       });
   }, []);
@@ -49,9 +50,10 @@ const Products = () => {
   const handleFilter = (name) => {
     setFilterData(name);
   };
-  console.log(ProductData);
+
+  // const shuffledArray = array.sort((a, b) => 0.5 - Math.random());
   return (
-    <Container sx={{ marginTop: "50px", button: { mx: 1 } }}>
+    <Container sx={{ marginTop: "50px", button: { mx: 1, my: 1 } }}>
       <Box sx={{ my: 3 }}>
         <Button variant="outlined" onClick={() => handleFilter("all")}>
           All
