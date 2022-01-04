@@ -132,7 +132,7 @@ const useFirebase = () => {
       .then()
   }
 
-  return { loginWithGoogle, isLoading, logOut, createUser, user, login };
+  return { loginWithGoogle, isLoading, logOut, createUser, admin, user, login };
 };
 
 export default useFirebase;
