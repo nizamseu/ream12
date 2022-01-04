@@ -17,6 +17,8 @@ import Login from "./Components/Login/Login/Login";
 import Register from "./Components/Login/Registration/Registration";
 import PrivateRoute from "./Components/Login/PrivateRoute/PrivateRoute";
 import CheckOut from "./Components/Pages/Checkout/CheckOut";
+import AddUserSuggest from "./Components/Pages/Dashboard/AddUserSuggest/AdduserSuggest";
+import DisplayUserSuggest from './Components/Pages/Dashboard/DisplayUserSuggest/DisplayUserSuggest';
 function App() {
   return (
     <BrowserRouter className="">
@@ -52,6 +54,8 @@ function App() {
           <Route path="/dashboard/addProduct" element={<AddProduct />} />
           <Route path="/dashboard/manageProduct" element={<MangeProducts />} />
           <Route path="/dashboard/ManageUser" element={<ManageUser />} />
+          <Route path="/dashboard/AddUserSuggest" element={<AddUserSuggest />} />
+          <Route path="/dashboard/DisplayUserSuggest" element={<DisplayUserSuggest />} />
           <Route path="/dashboard/makeAdmin" element={<MakeAdmin />} />
         </Route>
       </Routes>

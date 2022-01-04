@@ -109,45 +109,46 @@ const Cart = () => {
             )}
 
           </Grid>
-          <Grid item xs={12} md={4}>
-            <Paper variant="outlined">
-              <TableContainer component={Paper}>
-                <Table sx={{}} aria-label="spanning table">
-                  <TableHead>
-                    <Typography sx={{ textAlign: "center", margin: "10px 0" }} variant="h5">ORDER SUMMARY</Typography>
-                  </TableHead>
-                  <TableBody>
-                    <TableRow>
+          {cart.length &&
+            <Grid item xs={12} md={4}>
+              <Paper variant="outlined">
+                <TableContainer component={Paper}>
+                  <Table sx={{}} aria-label="spanning table">
+                    <TableHead>
+                      <Typography sx={{ textAlign: "center", margin: "10px 0" }} variant="h5">ORDER SUMMARY</Typography>
+                    </TableHead>
+                    <TableBody>
+                      <TableRow>
 
-                      <TableCell >SubsubTotal</TableCell>
-                      <TableCell align="right">৳ {subTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</TableCell>
-                    </TableRow>
-                    <TableRow>
+                        <TableCell >SubsubTotal</TableCell>
+                        <TableCell align="right">৳ {subTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</TableCell>
+                      </TableRow>
+                      <TableRow>
 
-                      <TableCell>Tax</TableCell>
-                      <TableCell align="right">৳ {text}</TableCell>
+                        <TableCell>Tax</TableCell>
+                        <TableCell align="right">৳ {text}</TableCell>
 
-                    </TableRow>
-                    <TableRow>
+                      </TableRow>
+                      <TableRow>
 
-                      <TableCell>Shipping</TableCell>
-                      <TableCell align="right">৳ {shipping}</TableCell>
+                        <TableCell>Shipping</TableCell>
+                        <TableCell align="right">৳ {shipping}</TableCell>
 
-                    </TableRow>
-                    <TableRow >
-                      <TableCell sx={{ fontWeight: "bold" }} >subTotal</TableCell>
-                      <TableCell sx={{ fontWeight: "bold" }} align="right">৳ {total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</TableCell>
-                    </TableRow>
-                    <Box sx={{ justifyContent: 'center', marginTop: "30px", marginLeft: "110px" }}>
-                      <Link to="/checkout " style={{ textDecoration: 'none' }}>      <Button variant="contained" sx={{ backgroundColor: " black", justifyContent: 'center', }}>PROCEED TO CHECKOUT</Button></Link>
-                    </Box>
+                      </TableRow>
+                      <TableRow >
+                        <TableCell sx={{ fontWeight: "bold" }} >subTotal</TableCell>
+                        <TableCell sx={{ fontWeight: "bold" }} align="right">৳ {total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</TableCell>
+                      </TableRow>
+                      <Box sx={{ justifyContent: 'center', marginTop: "30px", marginLeft: "110px" }}>
+                        <Link to="/checkout " style={{ textDecoration: 'none' }}>      <Button variant="contained" sx={{ backgroundColor: " black", justifyContent: 'center', }}>PROCEED TO CHECKOUT</Button></Link>
+                      </Box>
 
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Paper>
-          </Grid>
-
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Paper>
+            </Grid>
+          }
         </Grid>
       </Box>
     </Box>

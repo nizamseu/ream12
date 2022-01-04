@@ -45,11 +45,22 @@ function Dashboard(props) {
           <i className="far fa-plus-square"></i> Add Product
         </NavLink>{" "}
         <br />
+        <NavLink style={{ textDecoration: "none" }} to="/dashboard/AddUserSuggest">
+          <i className="far fa-plus-square"></i> Add User Suggest
+        </NavLink>{" "}
+        <br />
         <NavLink
           style={{ textDecoration: "none" }}
           to="/dashboard/manageProduct"
         >
           <i className="fas fa-tasks"></i> Manage Products
+        </NavLink>{" "}
+        <br />
+        <NavLink
+          style={{ textDecoration: "none" }}
+          to="/dashboard/DisplayUserSuggest"
+        >
+          <i className="fas fa-tasks"></i> Display User Suggest
         </NavLink>{" "}
         <br />
         <NavLink
