@@ -18,6 +18,7 @@ initializeAuthentication();
 const useFirebase = () => {
   const dispatch = useDispatch();
   const [user, setUser] = useState({});
+  const [admin, setAdmin] = useState(false)
   const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ const useFirebase = () => {
       displayName: name,
       photoURL: "https://i.ibb.co/17LfyKx/download.png",
     })
-      .then(() => {})
+      .then(() => { })
       .catch((error) => {
         console.log(error);
       });
@@ -97,7 +98,14 @@ const useFirebase = () => {
       })
       .finally(() => setIsLoading(false));
   };
+  // is admin
+  useEffect(() => {
+    fetch(`https://whispering-waters-68649.herokuapp.com/customers/${user.email}`)
+      .then(res => res.json())
+      .then(data => setAdmin(data.admin))
+  }, [user.email])
 
+  console.log(user.email, admin, "emailkdjfldjf")
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -109,7 +117,7 @@ const useFirebase = () => {
     });
     return unsubscribe;
   }, [auth]);
-  return { loginWithGoogle, isLoading, logOut, createUser, user, login };
+  return { loginWithGoogle, isLoading, logOut, createUser, user, admin, login };
 };
 
 export default useFirebase;

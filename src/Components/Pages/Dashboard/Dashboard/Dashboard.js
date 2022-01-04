@@ -15,7 +15,7 @@ import useAuth from "../../../../Hooks/useAuth";
 const drawerWidth = 200;
 
 function Dashboard(props) {
-  const { logOut } = useAuth();
+  const { logOut, admin } = useAuth();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -37,46 +37,50 @@ function Dashboard(props) {
       <Divider />
 
       <Box sx={{ ml: 3 }}>
-        <NavLink style={{ textDecoration: "none" }} to="/dashboard/myOrders">
+        {!admin && <Box><NavLink style={{ textDecoration: "none" }} to="/dashboard">
           <i className="fab fa-first-order-alt"></i> My Orders
         </NavLink>{" "}
-        <br />
-        <NavLink style={{ textDecoration: "none" }} to="/dashboard/addProduct">
-          <i className="far fa-plus-square"></i> Add Product
-        </NavLink>{" "}
-        <br />
-        <NavLink style={{ textDecoration: "none" }} to="/dashboard/AddUserSuggest">
-          <i className="far fa-plus-square"></i> Add User Suggest
-        </NavLink>{" "}
-        <br />
-        <NavLink
-          style={{ textDecoration: "none" }}
-          to="/dashboard/manageProduct"
-        >
-          <i className="fas fa-tasks"></i> Manage Products
-        </NavLink>{" "}
-        <br />
-        <NavLink
-          style={{ textDecoration: "none" }}
-          to="/dashboard/DisplayUserSuggest"
-        >
-          <i className="fas fa-tasks"></i> Display User Suggest
-        </NavLink>{" "}
-        <br />
-        <NavLink
-          style={{ textDecoration: "none" }}
-          to="/dashboard/manageOrders"
-        >
-          <i className="fab fa-product-hunt"></i> Manage Orders
-        </NavLink>{" "}
-        <br />
-        <NavLink style={{ textDecoration: "none" }} to="/dashboard/makeAdmin">
-          <i className="fas fa-user-shield"></i> Make Admin
-        </NavLink>{" "}
-        <br />
-        <NavLink style={{ textDecoration: "none" }} to="/dashboard/manageUser">
-          <i className="fas fa-user-shield"></i> Manage User
-        </NavLink>
+          <br />
+          <NavLink style={{ textDecoration: "none" }} to="/dashboard/AddUserSuggest">
+            <i className="far fa-plus-square"></i> Add User Suggest
+          </NavLink>{" "}
+          <br /></Box>}
+
+        {admin && <Box>
+
+          <NavLink style={{ textDecoration: "none" }} to="/dashboard/addProduct">
+            <i className="far fa-plus-square"></i> Add Product
+          </NavLink>{" "}
+          <br />
+          <NavLink
+            style={{ textDecoration: "none" }}
+            to="/dashboard/manageProduct"
+          >
+            <i className="fas fa-tasks"></i> Manage Products
+          </NavLink>{" "}
+          <br />
+          <NavLink
+            style={{ textDecoration: "none" }}
+            to="/dashboard/DisplayUserSuggest"
+          >
+            <i className="fas fa-tasks"></i> Display User Suggest
+          </NavLink>{" "}
+          <br />
+          <NavLink
+            style={{ textDecoration: "none" }}
+            to="/dashboard"
+          >
+            <i className="fab fa-product-hunt"></i> Manage Orders
+          </NavLink>{" "}
+          <br />
+          <NavLink style={{ textDecoration: "none" }} to="/dashboard/makeAdmin">
+            <i className="fas fa-user-shield"></i> Make Admin
+          </NavLink>{" "}
+          <br />
+          <NavLink style={{ textDecoration: "none" }} to="/dashboard/manageUser">
+            <i className="fas fa-user-shield"></i> Manage User
+          </NavLink>
+        </Box>}
       </Box>
 
       <Divider />
