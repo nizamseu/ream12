@@ -14,7 +14,7 @@ const ManageProducts = () => {
 
     useEffect(() => {
         // url here for getting all products
-        fetch(' ')
+        fetch('https://whispering-waters-68649.herokuapp.com/electronicscollection')
         .then(res => res.json())
         .then(data => setAllProducts(data))
     }, []);
@@ -22,7 +22,7 @@ const ManageProducts = () => {
     const handleDeleteProduct = (id) => {
         const isDelete = window.confirm("Are You Sure to Delete?");
         if(isDelete){
-            fetch(` ${id}`, {
+            fetch(`https://whispering-waters-68649.herokuapp.com/electronicscollection/${id}`, {
             method: 'DELETE'
             })
             .then(res => res.json())

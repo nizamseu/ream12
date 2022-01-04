@@ -13,7 +13,7 @@ const ManageUser = () => {
     const [success, setSuccess] = useState(false);
 
     useEffect(()=> {
-        fetch(` `)
+        fetch('https://whispering-waters-68649.herokuapp.com/customers')
         .then(res => res.json())
         .then(data => setOrders(data))
     }, []);
@@ -21,12 +21,12 @@ const ManageUser = () => {
     const handleDeleteOrder = (id) => {
         const isDelete = window.confirm("Are You Sure to Delete?");
         if(isDelete){
-            fetch(` ${id}`, {
+            fetch(`https://whispering-waters-68649.herokuapp.com/customers/${id}`, {
             method: 'DELETE',
             })
             .then(res => res.json())
             .then(data => {
-                if(data.deletedCount){
+                if(data.deletedCount > 0){
                     setSuccess(true);
                     const remaining = orders.filter(order => order._id !== id);
                     setOrders(remaining);
@@ -46,7 +46,7 @@ const ManageUser = () => {
                 <TableRow>
                     <TableCell>Index</TableCell>
                     <TableCell>Name</TableCell>
-                    <TableCell>Edit</TableCell>
+                    <TableCell>Email</TableCell>
                     <TableCell>Action</TableCell>
                 </TableRow>
                 </TableHead>
@@ -59,11 +59,8 @@ const ManageUser = () => {
                     <TableCell component="th" scope="row">
                         {index + 1}
                     </TableCell>
-                    <TableCell component="th" scope="row">
-                        {row.model}
-                    </TableCell>
-                    <TableCell>{row.price}</TableCell>
-                    <TableCell>{row.desc}</TableCell>
+                    <TableCell>{row.displayName}</TableCell>
+                    <TableCell>{row.email}</TableCell>
                     <TableCell>
                         <Button onClick={() => handleDeleteOrder(row._id)} style={{backgroundColor: '#4298F9'}} variant="contained">Delete</Button>
                     </TableCell>

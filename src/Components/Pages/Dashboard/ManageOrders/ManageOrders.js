@@ -50,7 +50,6 @@ const ManageOrders = () => {
               <TableCell>Client Name</TableCell>
               <TableCell>Client Address</TableCell>
               <TableCell>Phone Number</TableCell>
-              <TableCell>Status</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -63,20 +62,12 @@ const ManageOrders = () => {
                   {index + 1}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {row.productName}
+                  {row.cart[0]?.name}
                 </TableCell>
-                <TableCell>{row.displayName}</TableCell>
-                <TableCell>{row.address}</TableCell>
-                <TableCell>{row.phone}</TableCell>
-                <TableCell>
-                  <Button
-                    onClick={() => handleUpdateStatus(row._id)}
-                    style={{ backgroundColor: "goldenRod" }}
-                    variant="contained"
-                  >
-                    {row.status}
-                  </Button>
-                </TableCell>
+                {/* <TableCell>{row.cart?.object?.name}</TableCell> */}
+                <TableCell>{row.data?.name}</TableCell>
+                <TableCell>{row.data?.address}</TableCell>
+                <TableCell>{row.data?.phone}</TableCell>
               </TableRow>
             ))}
           </TableBody>

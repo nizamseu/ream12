@@ -18,6 +18,7 @@ initializeAuthentication();
 const useFirebase = () => {
   const dispatch = useDispatch();
   const [user, setUser] = useState({});
+  const [admin, setAdmin] = useState(false)
   const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ const useFirebase = () => {
       displayName: name,
       photoURL: "https://i.ibb.co/17LfyKx/download.png",
     })
-      .then(() => {})
+      .then(() => { })
       .catch((error) => {
         console.log(error);
       });
@@ -59,6 +60,7 @@ const useFirebase = () => {
     console.log(email, password);
     createUserWithEmailAndPassword(auth, email, password)
       .then((result) => {
+        saveUser(email, name, 'POST')
         profileUpdate(name);
       })
       .catch((error) => {
@@ -97,7 +99,14 @@ const useFirebase = () => {
       })
       .finally(() => setIsLoading(false));
   };
+  // is admin
+  useEffect(() => {
+    fetch(`https://whispering-waters-68649.herokuapp.com/customers/${user.email}`)
+      .then(res => res.json())
+      .then(data => setAdmin(data.admin))
+  }, [user.email])
 
+  console.log(user.email, admin, "emailkdjfldjf")
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -109,7 +118,21 @@ const useFirebase = () => {
     });
     return unsubscribe;
   }, [auth]);
-  return { loginWithGoogle, isLoading, logOut, createUser, user, login };
+
+  // Saving user info
+  const saveUser = (email, displayName, method) => {
+    const user = { email, displayName };
+    fetch('https://whispering-waters-68649.herokuapp.com/customers', {
+      method: method,
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+      .then()
+  }
+
+  return { loginWithGoogle, isLoading, logOut, createUser, admin, user, login };
 };
 
 export default useFirebase;

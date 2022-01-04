@@ -1,6 +1,6 @@
 import "./App.css";
 import Home from "./Components/Pages/Home/Home/Home";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Products from "./Components/Pages/Products/Products";
 import Cart from "./Components/Pages/Cart/Cart";
 import ProductDetails from "./Components/Pages/ProductDetails/ProductDetails";
@@ -17,9 +17,18 @@ import Login from "./Components/Login/Login/Login";
 import Register from "./Components/Login/Registration/Registration";
 import PrivateRoute from "./Components/Login/PrivateRoute/PrivateRoute";
 import CheckOut from "./Components/Pages/Checkout/CheckOut";
+import AddUserSuggest from "./Components/Pages/Dashboard/AddUserSuggest/AdduserSuggest";
+import DisplayUserSuggest from './Components/Pages/Dashboard/DisplayUserSuggest/DisplayUserSuggest';
+import AdminRoute from "./Components/Login/AdminRoute/AdminRoute";
+import useAuth from './Hooks/useAuth';
+
+
+
 function App() {
+
+  const { admin } = useAuth()
   return (
-    <BrowserRouter className="">
+    <div>
       <Navbar></Navbar>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -46,16 +55,17 @@ function App() {
             </PrivateRoute>
           }
         >
-          <Route path="/dashboard" element={<ManageOrders />} />
-          <Route path="/dashboard/myOrders" element={<MyOrders />} />
-          <Route path="/dashboard/manageOrders" element={<ManageOrders />} />
-          <Route path="/dashboard/addProduct" element={<AddProduct />} />
-          <Route path="/dashboard/manageProduct" element={<MangeProducts />} />
-          <Route path="/dashboard/ManageUser" element={<ManageUser />} />
-          <Route path="/dashboard/makeAdmin" element={<MakeAdmin />} />
+          {admin ? <Route path="/dashboard" element={<AdminRoute><ManageOrders /> </AdminRoute>} />
+            : <Route path="/dashboard" element={<MyOrders />} />}
+          <Route path="/dashboard/addProduct" element={<AdminRoute><AddProduct /></AdminRoute>} />
+          <Route path="/dashboard/manageProduct" element={<AdminRoute><MangeProducts /></AdminRoute>} />
+          <Route path="/dashboard/ManageUser" element={<AdminRoute><ManageUser /></AdminRoute>} />
+          <Route path="/dashboard/AddUserSuggest" element={<AddUserSuggest />} />
+          <Route path="/dashboard/DisplayUserSuggest" element={<AdminRoute><DisplayUserSuggest /></AdminRoute>} />
+          <Route path="/dashboard/makeAdmin" element={<AdminRoute><MakeAdmin /></AdminRoute>} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </div>
   );
 }
 
